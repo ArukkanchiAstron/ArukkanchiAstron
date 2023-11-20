@@ -1,0 +1,131 @@
+Certainly! Here's a simple example of a number-based sliding puzzle game in Python:
+
+```python
+import random
+
+def print_puzzle(puzzle):
+    for row in puzzle:
+        print(' '.join([str(elem).rjust(2) for elem in row]))
+    print()
+
+def shuffle_puzzle(puzzle):
+    flat_puzzle = [elem for row in puzzle for elem in row]
+    random.shuffle(flat_puzzle)
+    shuffled_puzzle = [flat_puzzle[i:i+len(puzzle)] for i in range(0, len(flat_puzzle), len(puzzle))]
+    return shuffled_puzzle
+
+def find_blank(puzzle):
+    for i, row in enumerate(puzzle):
+        for j, elem in enumerate(row):
+            if elem == 0:
+                return i, j
+
+def move(tile, puzzle):
+    blank_i, blank_j = find_blank(puzzle)
+    tile_i, tile_j = tile
+
+    if (abs(tile_i - blank_i) == 1 and tile_j == blank_j) or (abs(tile_j - blank_j) == 1 and tile_i == blank_i):
+        puzzle[blank_i][blank_j], puzzle[tile_i][tile_j] = puzzle[tile_i][tile_j], puzzle[blank_i][blank_j]
+        return True
+    else:
+        return False
+
+def check_win(puzzle, solved_puzzle):
+    return puzzle == solved_puzzle
+
+def main():
+    puzzle_size = 3
+    solved_puzzle = [[puzzle_size * row + col + 1 for col in range(puzzle_size)] for row in range(puzzle_size)]
+    solved_puzzle[-1][-1] = 0  # Blank tile represented by 0
+
+    puzzle = shuffle_puzzle(solved_puzzle)
+    
+    while True:
+        print_puzzle(puzzle)
+        if check_win(puzzle, solved_puzzle):
+            print("Congratulations! You've solved the puzzle!")
+            break
+        
+        try:
+            tile = tuple(map(int, input("Enter the tile number you want to move (row column): ").split()))
+            if not (0 <= tile[0] < puzzle_size and 0 <= tile[1] < puzzle_size):
+                raise ValueError("Invalid input! Enter numbers within the puzzle range.")
+            
+            if not move(tile, puzzle):
+                raise ValueError("Invalid move! Choose a tile adjacent to the blank space.")
+        except ValueError as e:
+            print(e)
+            continue
+
+if __name__ == "__main__":
+    main()
+```
+
+This code implements a basic command-line sliding puzzle game. It creates a 3x3 grid by default (you can change the `puzzle_size` variable to adjust the size), shuffles it, and allows you to move the tiles to solve the puzzle. To play, run the code in a Python environment that supports user input.
+
+This example provides a starting point. Depending on your requirements and preferences, you might want to enhance the game with a GUI, add more features, or create a different type of puzzle game.Certainly! Here's a simple example of a number-based sliding puzzle game in Python:
+
+```python
+import random
+
+def print_puzzle(puzzle):
+    for row in puzzle:
+        print(' '.join([str(elem).rjust(2) for elem in row]))
+    print()
+
+def shuffle_puzzle(puzzle):
+    flat_puzzle = [elem for row in puzzle for elem in row]
+    random.shuffle(flat_puzzle)
+    shuffled_puzzle = [flat_puzzle[i:i+len(puzzle)] for i in range(0, len(flat_puzzle), len(puzzle))]
+    return shuffled_puzzle
+
+def find_blank(puzzle):
+    for i, row in enumerate(puzzle):
+        for j, elem in enumerate(row):
+            if elem == 0:
+                return i, j
+
+def move(tile, puzzle):
+    blank_i, blank_j = find_blank(puzzle)
+    tile_i, tile_j = tile
+
+    if (abs(tile_i - blank_i) == 1 and tile_j == blank_j) or (abs(tile_j - blank_j) == 1 and tile_i == blank_i):
+        puzzle[blank_i][blank_j], puzzle[tile_i][tile_j] = puzzle[tile_i][tile_j], puzzle[blank_i][blank_j]
+        return True
+    else:
+        return False
+
+def check_win(puzzle, solved_puzzle):
+    return puzzle == solved_puzzle
+
+def main():
+    puzzle_size = 3
+    solved_puzzle = [[puzzle_size * row + col + 1 for col in range(puzzle_size)] for row in range(puzzle_size)]
+    solved_puzzle[-1][-1] = 0  # Blank tile represented by 0
+
+    puzzle = shuffle_puzzle(solved_puzzle)
+    
+    while True:
+        print_puzzle(puzzle)
+        if check_win(puzzle, solved_puzzle):
+            print("Congratulations! You've solved the puzzle!")
+            break
+        
+        try:
+            tile = tuple(map(int, input("Enter the tile number you want to move (row column): ").split()))
+            if not (0 <= tile[0] < puzzle_size and 0 <= tile[1] < puzzle_size):
+                raise ValueError("Invalid input! Enter numbers within the puzzle range.")
+            
+            if not move(tile, puzzle):
+                raise ValueError("Invalid move! Choose a tile adjacent to the blank space.")
+        except ValueError as e:
+            print(e)
+            continue
+
+if __name__ == "__main__":
+    main()
+```
+
+This code implements a basic command-line sliding puzzle game. It creates a 3x3 grid by default (you can change the `puzzle_size` variable to adjust the size), shuffles it, and allows you to move the tiles to solve the puzzle. To play, run the code in a Python environment that supports user input.
+
+This example provides a starting point. Depending on your requirements and preferences, you might want to enhance the game with a GUI, add more features, or create a different type of puzzle game.￼Enter
