@@ -1,0 +1,42 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(138, 212, 247);
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(250, 241, 241, 0.493);
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
